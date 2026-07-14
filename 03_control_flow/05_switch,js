@@ -1,0 +1,83 @@
+
+//The switch statement is used to execute one block of code from multiple options. 
+// It compares the value of an expression with each case. When a matching case is found, that block of code executes. If no case matches, the default block executes.
+
+let day = 3;
+
+switch (day) {
+    case 1:
+        console.log("Monday");
+        break;
+
+    case 2:
+        console.log("Tuesday");
+        break;
+
+    case 3:
+        console.log("Wednesday");
+        break;
+
+    case 4:
+        console.log("Thursday");
+        break;
+
+    default:
+        console.log("Invalid Day");
+}
+
+                 //2//
+       
+  let month = 5;
+
+switch (month) {
+
+    case 1:
+        console.log("January");
+        break;
+
+    case 2:
+        console.log("February");
+        break;
+
+    case 3:
+        console.log("March");
+        break;
+
+    case 4:
+        console.log("April");
+        break;
+
+    case 5:
+        console.log("May");
+        break;
+
+    default:
+        console.log("Invalid Month");
+} 
+
+
+                //3//
+   
+    let operation = "+";
+
+switch (operation) {
+
+    case "+":
+        console.log("Addition");
+        break;
+
+    case "-":
+        console.log("Subtraction");
+        break;
+
+    case "*":
+        console.log("Multiplication");
+        break;
+
+    case "/":
+        console.log("Division");
+        break;
+
+    default:
+        console.log("Invalid Operation");
+}            
