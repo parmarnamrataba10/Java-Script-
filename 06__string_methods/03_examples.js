@@ -212,3 +212,84 @@ console.log(text23.slice(4));
 let text24 = "Programming";
 
 console.log(text24.slice(2, 7));
+
+
+// split() examples
+
+// 1
+
+let str1 = "HTML CSS JavaScript";
+
+console.log(str1.split(" "));
+
+// 2
+
+let str2 = "apple,banana,mango";
+
+console.log(str2.split(","));
+
+
+// substring() examples
+
+// 1
+
+let str3 = "Programming";
+
+console.log(str3.substring(3));
+
+// 2
+
+let str4 = "JavaScript";
+
+console.log(str4.substring(8, 4));
+
+
+
+
+// toLowerCase() examples
+
+// 1
+
+let str7 = "HELLO WORLD";
+
+console.log(str7.toLowerCase());
+
+// 2
+
+let str8 = "JavaSCRIPT";
+
+console.log(str8.toLowerCase());
+
+
+// toUpperCase() examples
+
+// 1
+
+let str9 = "hello world";
+
+console.log(str9.toUpperCase());
+
+// 2
+
+let str10 = "javaScript";
+
+console.log(str10.toUpperCase());
+
+
+// trim() examples
+
+// 1
+
+let str11 = "      Hello World      ";
+
+console.log(str11.length);
+
+console.log(str11.trim().length);
+
+// 2
+
+let str12 = "      JavaScript      ";
+
+console.log(str12.length);
+
+console.log(str12.trim().length);
