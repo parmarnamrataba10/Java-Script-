@@ -1,1 +1,24 @@
 
+.product-card {
+    height: 100%;
+}
+
+.product-img {
+    height: 370px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body .btn {
+    width: fit-content;
+    margin-top: auto;
+}
+
+.modal-content{
+
+    width:200vh;
+}
