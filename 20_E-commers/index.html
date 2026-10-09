@@ -25,6 +25,9 @@
         <li class="nav-item">
         <a class="nav-link" href="#" onclick="showCartItem()">Cart</a>
         </li>
+         <li class="nav-item">
+        <a class="nav-link" href="#" onclick="addProductModalShow()">Add</a>
+        </li>
         
       </ul>
       <form class="d-flex" role="search">
@@ -79,6 +82,86 @@
                 </div>
             </div>
         </div>
+
+       
+        <div class="modal" id="addProductModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addProductForm">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="productName" name="ProductName"
+                                    placeholder="Product Name" required />
+                                <label for="ProductName">Product Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="ProductPrice" name="ProductPrice"
+                                    placeholder="Product Price" required />
+                                <label for="ProductPrice">Product Price</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="ProductImage" name="ProductImage"
+                                    placeholder="Product Image" required />
+                                <label for="ProductImage">Product Image</label>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="addProduct()">
+                                    Add Product
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="updateProductModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">update Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="updateProductForm">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="updateProductName" name="ProductName"
+                                    placeholder="Product Name" required />
+                                <label for="ProductName">Product Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="updateProductPrice" name="ProductPrice"
+                                    placeholder="Product Price" required />
+                                <label for="ProductPrice">Product Price</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="updateProductImage" name="ProductImage"
+                                    placeholder="Product Image" required />
+                                <label for="ProductImage">Product Image</label>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="updateProduct()">
+                                    update Product
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </main>
     <script src="./script.js"></script>

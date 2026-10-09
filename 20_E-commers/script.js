@@ -125,6 +125,8 @@ function showProduct() {
                             class="btn btn-primary">
                             Add to Cart
                         </button>
+                       <button class="btn btn-warning text-white" onclick = "updateToCart(${p.id})" >update Cart</button>
+                       <button class="btn btn-danger" onclick = "deleteToCart(${p.id})" >delete</button>
 
                     </div>
 
@@ -267,6 +269,7 @@ function showCartData() {
         `;
     });
 }
+ grandTotal();
 
 
 function increaseQty(id) {
@@ -287,19 +290,35 @@ function increaseQty(id) {
 
 function decreaseQty(id) {
 
-    let productItem = localCartItem.find((p) => p.id === id);
+    try {
 
-    if (productItem) {
+        const  index = localCartItem.findIndex((p)=> p.id === id)    
 
-        productItem.qty--;
+        if (index === -1){
 
-        if (productItem.qty <= 0) {
-
-            localCartItem = localCartItem.filter((p) => p.id !== id);
-
+            throw new Error ("product not found") 
         }
+        
+        const productItem =localCartItem.find((p)=>p.id === id )
+
+        if (productItem)
+            {
+
+            productItem.qty--;
+        }
+        if (productItem.qty === 0)
+        {
+            localCartItem.splice(index,1);
+        }
+        updateLocalStorage();
+
+    } catch (error) 
+    {
+        console.log(error)
+        
     }
 
+  
     updateLocalStorage();
 
     showCartData();
@@ -315,5 +334,95 @@ function removeItem(id) {
     updateLocalStorage();
 
     showCartData();
+}
 
+function grandTotal() {
+
+    const total = document.getElementById("GrandTotal")
+    total.innerHTML = "";
+
+    const totalAmounts = localCartItem.reduce((acc, curr) => {
+        return (acc += curr.price * curr.qty)
+    }, 0)
+
+    total.innerHTML = `Grand Total<h5>₹${totalAmounts}</h5>`
+}
+
+function checkOut() {
+    try {
+
+        if (localCartItem.length === 0) {
+            return alert("your cart is empty please add some product")
+        }
+        alert("your order placed successfully")
+
+        localCartItem = []
+        updateLocalStorage();
+
+        const cartModal = document.getElementById("cartModal")
+        modal = new bootstrap.Modal(cartModal)
+
+        modal.hide();
+
+    } catch (error) {
+
+        console.log(error)
+
+    }
+}
+
+function addProductModalShow() {
+
+    const addProductModal = document.getElementById("addProductModal")
+
+    const modal = new bootstrap.Modal(addProductModal)
+
+    modal.show();
+
+}
+
+function addProduct() {
+
+    const productName = document.getElementById("productName").value.trim();
+    const ProductPrice = document.getElementById("ProductPrice").value.trim();
+    const ProductImage = document.getElementById("ProductImage").value.trim();
+
+    if (!productName || !ProductPrice || !ProductImage) {
+        alert("product details are required")
+    }
+
+    const newProduct = {
+        id: new Date().getTime(),
+        name: productName,
+        price: ProductPrice,
+        img: ProductImage
+    };
+
+    console.log("new", newProduct)
+    products.push(newProduct)
+
+    updateLocalStorage();
+
+    console.log("products", products)
+
+    alert("new product added successfully")
+
+    showProduct();
+}
+
+function deleteToCart(id) {
+
+    const deleteProduct = products.find((p) => p.id === id)
+
+    if (!deleteProduct) {
+
+        alert("product not found")
+
+    }
+
+    products = products.filter((p) => p.id !== id)
+
+    alert("product deleted")
+
+    showProduct()
 }
