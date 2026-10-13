@@ -1,137 +1,141 @@
 
 
-const products = [
+let products = [
     {
         id: 1,
-        name: "Wireless Headphones",
-        img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
-        price: 1499,
+        name: "Diamond Necklace",
+        img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600",
+        price: 4999
     },
-
     {
         id: 2,
-        name: "Smart Watch",
-        img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
-        price: 2499,
+        name: "Diamond Ring",
+        img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600",
+        price: 2499
     },
-
     {
         id: 3,
-        name: "Running Shoes",
-        img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
-        price: 1999,
+        name: "Gold Bracelet",
+        img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600",
+        price: 1999
     },
-
     {
         id: 4,
-        name: "Backpack",
-        img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
-        price: 999,
+        name: "Diamond Earrings",
+        img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600",
+        price: 1799
     },
-
     {
         id: 5,
-        name: "Sunglasses",
-        img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
-        price: 799,
+        name: "Pearl Necklace",
+      img: "https://plus.unsplash.com/premium_photo-1674255466849-b23fc5f5d3eb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+        price: 2999
     },
-
     {
         id: 6,
-        name: "Digital Camera",
-        img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
-        price: 15999,
+        name: "Silver Ring",
+      img: "https://images.unsplash.com/photo-1589674781759-c21c37956a44?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+        price: 999
     },
-
     {
         id: 7,
-        name: "Laptop",
-        img: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
-        price: 54999,
+        name: "Charm Bracelet",
+        img: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600",
+        price: 1499
     },
-
     {
         id: 8,
-        name: "Mechanical Keyboard",
-        img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3",
-        price: 2999,
+        name: "Heart Pendant",
+        img: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600",
+        price: 1299
     },
-
     {
         id: 9,
-        name: "Mobile Phone",
-        img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
-        price: 24999,
+        name: "Diamond Stud Earrings",
+        img: "https://images.unsplash.com/photo-1617038220319-276d3cfab638?w=600",
+        price: 2299
     },
-
     {
         id: 10,
-        name: "Leather Wallet",
-        img: "https://images.unsplash.com/photo-1627123424574-724758594e93",
-        price: 699,
+        name: "Gold Hoop Earrings",
+        img: "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600",
+        price: 1599
     },
-
     {
         id: 11,
-        name: "Coffee Mug",
-        img: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d",
-        price: 399,
+        name: "Layered Necklace",
+      img:"https://images.unsplash.com/photo-1633934542430-0905ccb5f050?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+        price: 1899
     },
-
     {
         id: 12,
-        name: "Bluetooth Speaker",
-        img: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1",
-        price: 1799,
-    },
+        name: "Luxury Jewellery Set",
+        img: "https://images.unsplash.com/photo-1619119069152-a2b331eb392a?w=600",
+        price: 5999
+    }
 ];
 
 let localCartItem = JSON.parse(localStorage.getItem("cart")) || [];
 
-
-
-
-function showProduct() {
-
+// Display all products
+function showProduct(searchText = "") {
     const productList = document.getElementById("product-list");
 
     productList.innerHTML = "";
 
-    products.forEach((p) => {
+    const filteredProducts = products.filter(p =>
+        p.name.toLowerCase().includes(searchText.toLowerCase())
+    );
 
+    if (filteredProducts.length === 0) {
+        productList.innerHTML =
+            `<div class="col-12 text-center">
+                <h4>No products found</h4>
+            </div>`;
+        return;
+    }
+
+    filteredProducts.forEach(p => {
         productList.innerHTML += `
-            <div class="col-md-4 mt-3">
-
+            <div class="col-12 col-md-6 col-lg-4 d-flex">
                 <div class="card product-card">
 
-                    <img 
-                        src="${p.img}" 
-                        class="card-img-top product-img" 
+                    <img
+                        src="${p.img}"
+                        class="card-img-top product-img"
                         alt="${p.name}"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Image+Not+Available';"
                     >
 
                     <div class="card-body">
 
-                        <h5 class="card-title">
-                            ${p.name}
-                        </h5>
+                        <h5 class="card-title">${p.name}</h5>
 
-                        <p class="card-text">
-                            ₹${p.price}
-                        </p>
+                        <h5 class="card-text">₹${p.price}</h5>
 
-                        <button 
-                            onclick="addToCart(${p.id})" 
-                            class="btn btn-primary">
-                            Add to Cart
-                        </button>
-                       <button class="btn btn-warning text-white" onclick = "updateToCart(${p.id})" >update Cart</button>
-                       <button class="btn btn-danger" onclick = "deleteToCart(${p.id})" >delete</button>
+                        <div class="product-buttons">
 
+                            <button
+                                class="btn btn-primary"
+                                onclick="addToCart(${p.id})">
+                                Add to Cart
+                            </button>
+
+                            <button
+                                class="btn btn-warning text-white"
+                                onclick="updateProduct(${p.id})">
+                                Update
+                            </button>
+
+                            <button
+                                class="btn btn-danger"
+                                onclick="deleteToCart(${p.id})">
+                                Delete
+                            </button>
+
+                        </div>
                     </div>
-
                 </div>
-
             </div>
         `;
     });
@@ -139,290 +143,320 @@ function showProduct() {
 
 showProduct();
 
+// serach bar 
+
+document.getElementById("searchForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let searchText = document.getElementById("searchInput").value.trim();
+
+    showProduct(searchText);
+});
 
 
+// Search products
+document.getElementById("searchForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const searchText = document.getElementById("searchInput").value.trim();
+
+    showProduct(searchText);
+});
+
+// Add product to cart
 function addToCart(id) {
-
     try {
-
-        let productItem = localCartItem.find((p) => p.id === id);
+        let productItem = localCartItem.find(p => p.id === id);
 
         if (productItem) {
-
             productItem.qty++;
-
         } else {
+            productItem = products.find(p => p.id === id);
 
-            productItem = products.find((p) => p.id === id);
+            if (!productItem) {
+                alert("Product not found");
+                return;
+            }
 
             localCartItem.push({
                 ...productItem,
-                qty: 1,
+                qty: 1
             });
         }
 
         updateLocalStorage();
 
         alert("Item added successfully");
-
     } catch (error) {
-
         console.log(error);
-
     }
 }
 
-
-
+// Update cart in local storage
 function updateLocalStorage() {
-
     localStorage.setItem("cart", JSON.stringify(localCartItem));
 
+    showCartData();
+    grandTotal();
 }
 
+// Show cart modal
 function showCartItem() {
-
     const cartModal = document.getElementById("cartModal");
-
-    const modal = new bootstrap.Modal(cartModal);
+    const modal = bootstrap.Modal.getOrCreateInstance(cartModal);
 
     modal.show();
 
     showCartData();
-
+    grandTotal();
 }
 
-
+// Display cart products
 function showCartData() {
-
     const tableBody = document.getElementById("table-body");
 
     tableBody.innerHTML = "";
 
     localCartItem.forEach((p, index) => {
-
         tableBody.innerHTML += `
             <tr>
+                <td>${index + 1}</td>
 
                 <td>
-                    ${index + 1}
-                </td>
-
-                <td>
-
-                    <img 
-                        src="${p.img}" 
-                        class="cartProductImg" 
+                    <img
+                        src="${p.img}"
+                        class="cartProductImg"
                         alt="${p.name}"
-                        width="60"
                     >
-
                 </td>
 
-                <td>
-                    ${p.name}
-                </td>
+                <td>${p.name}</td>
+
+                <td>₹${p.price}</td>
 
                 <td>
-                    ₹${p.price}
-                </td>
+                    <div class="d-flex justify-content-center align-items-center gap-2">
 
-                <td>
-
-                    <div class="d-flex justify-content-center align-items-center gap-3">
-
-                        <button 
+                        <button
                             class="btn btn-outline-success"
                             onclick="increaseQty(${p.id})">
                             +
                         </button>
 
-                        <h5>
-                            ${p.qty}
-                        </h5>
+                        <span>${p.qty}</span>
 
-                        <button 
+                        <button
                             class="btn btn-outline-warning"
                             onclick="decreaseQty(${p.id})">
                             -
                         </button>
 
                     </div>
-
                 </td>
 
-                <td>
-                    ₹${p.qty * p.price}
-                </td>
+                <td>₹${p.qty * p.price}</td>
 
                 <td>
-
-                    <button 
+                    <button
                         class="btn btn-outline-danger"
-                        onclick="removeItem(${p.id})">
+                        onclick="removeProduct(${p.id})">
                         Remove
                     </button>
-
                 </td>
-
             </tr>
         `;
     });
 }
- grandTotal();
 
-
+// Increase quantity
 function increaseQty(id) {
+    const product = localCartItem.find(p => p.id === id);
 
-    let productItem = localCartItem.find((p) => p.id === id);
-
-    if (productItem) {
-
-        productItem.qty++;
-
-    }
-
-    updateLocalStorage();
-
-    showCartData();
-
-}
-
-function decreaseQty(id) {
-
-    try {
-
-        const  index = localCartItem.findIndex((p)=> p.id === id)    
-
-        if (index === -1){
-
-            throw new Error ("product not found") 
-        }
-        
-        const productItem =localCartItem.find((p)=>p.id === id )
-
-        if (productItem)
-            {
-
-            productItem.qty--;
-        }
-        if (productItem.qty === 0)
-        {
-            localCartItem.splice(index,1);
-        }
+    if (product) {
+        product.qty++;
         updateLocalStorage();
+    }
+}
 
-    } catch (error) 
-    {
-        console.log(error)
-        
+// Decrease quantity
+function decreaseQty(id) {
+    const product = localCartItem.find(p => p.id === id);
+
+    if (!product) {
+        return;
     }
 
-  
-    updateLocalStorage();
+    product.qty--;
 
-    showCartData();
-
-}
-
-
-
-function removeItem(id) {
-
-    localCartItem = localCartItem.filter((p) => p.id !== id);
+    if (product.qty <= 0) {
+        localCartItem = localCartItem.filter(p => p.id !== id);
+    }
 
     updateLocalStorage();
-
-    showCartData();
 }
 
+// Remove product from cart
+function removeProduct(id) {
+    localCartItem = localCartItem.filter(p => p.id !== id);
+
+    updateLocalStorage();
+}
+
+// Calculate grand total
 function grandTotal() {
-
-    const total = document.getElementById("GrandTotal")
-    total.innerHTML = "";
+    const total = document.getElementById("GrandTotal");
 
     const totalAmounts = localCartItem.reduce((acc, curr) => {
-        return (acc += curr.price * curr.qty)
-    }, 0)
+        return acc + Number(curr.price) * curr.qty;
+    }, 0);
 
-    total.innerHTML = `Grand Total<h5>₹${totalAmounts}</h5>`
+    total.innerHTML = `Grand Total: ₹${totalAmounts}`;
 }
 
+// Checkout
 function checkOut() {
-    try {
+    if (localCartItem.length === 0) {
+        alert("Your cart is empty. Please add some products.");
+        return;
+    }
 
-        if (localCartItem.length === 0) {
-            return alert("your cart is empty please add some product")
-        }
-        alert("your order placed successfully")
+    alert("Your order placed successfully");
 
-        localCartItem = []
-        updateLocalStorage();
+    localCartItem = [];
 
-        const cartModal = document.getElementById("cartModal")
-        modal = new bootstrap.Modal(cartModal)
+    updateLocalStorage();
 
+    const cartModal = document.getElementById("cartModal");
+    const modal = bootstrap.Modal.getInstance(cartModal);
+
+    if (modal) {
         modal.hide();
-
-    } catch (error) {
-
-        console.log(error)
-
     }
 }
 
+// Show Add Product modal
 function addProductModalShow() {
+    const addProductModal = document.getElementById("addProductModal");
 
-    const addProductModal = document.getElementById("addProductModal")
-
-    const modal = new bootstrap.Modal(addProductModal)
-
-    modal.show();
-
+    bootstrap.Modal.getOrCreateInstance(addProductModal).show();
 }
 
-function addProduct() {
+// Add a new product
+document.getElementById("addProductForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
     const productName = document.getElementById("productName").value.trim();
-    const ProductPrice = document.getElementById("ProductPrice").value.trim();
-    const ProductImage = document.getElementById("ProductImage").value.trim();
+    const productPrice = Number(document.getElementById("ProductPrice").value);
+    const productImage = document.getElementById("ProductImage").value.trim();
 
-    if (!productName || !ProductPrice || !ProductImage) {
-        alert("product details are required")
+    if (!productName || !productImage || productPrice < 0 ||
+        document.getElementById("ProductPrice").value === "") {
+        alert("Please enter valid product details");
+        return;
     }
 
     const newProduct = {
-        id: new Date().getTime(),
+        id: Date.now(),
         name: productName,
-        price: ProductPrice,
-        img: ProductImage
+        price: productPrice,
+        img: productImage
     };
 
-    console.log("new", newProduct)
-    products.push(newProduct)
-
-    updateLocalStorage();
-
-    console.log("products", products)
-
-    alert("new product added successfully")
+    products.push(newProduct);
 
     showProduct();
-}
 
+    this.reset();
+
+    alert("New product added successfully");
+
+    bootstrap.Modal.getInstance(
+        document.getElementById("addProductModal")
+    ).hide();
+});
+
+// Delete product
 function deleteToCart(id) {
-
-    const deleteProduct = products.find((p) => p.id === id)
+    const deleteProduct = products.find(p => p.id === id);
 
     if (!deleteProduct) {
-
-        alert("product not found")
-
+        alert("Product not found");
+        return;
     }
 
-    products = products.filter((p) => p.id !== id)
+    if (!confirm("Are you sure you want to delete this product?")) {
+        return;
+    }
 
-    alert("product deleted")
+    products = products.filter(p => p.id !== id);
 
-    showProduct()
+    // Also remove the deleted product from the cart
+    localCartItem = localCartItem.filter(p => p.id !== id);
+
+    updateLocalStorage();
+    showProduct();
+
+    alert("Product deleted successfully");
+}
+
+// Update product
+function updateProduct(id) {
+    const product = products.find(p => p.id === id);
+
+    if (!product) {
+        alert("Product not found");
+        return;
+    }
+
+    document.getElementById("updateProductName").value = product.name;
+    document.getElementById("updateProductPrice").value = product.price;
+    document.getElementById("updateProductImage").value = product.img;
+
+    const updateModal = document.getElementById("updateProductModal");
+
+    bootstrap.Modal.getOrCreateInstance(updateModal).show();
+
+    const form = document.getElementById("updateProductForm");
+
+    // Save the updated product details
+    form.onsubmit = function (e) {
+        e.preventDefault();
+
+        const newName = document.getElementById("updateProductName").value.trim();
+        const newPrice = Number(document.getElementById("updateProductPrice").value);
+        const newImage = document.getElementById("updateProductImage").value.trim();
+
+        if (!newName || !newImage ||
+            document.getElementById("updateProductPrice").value === "" ||
+            newPrice < 0) {
+            alert("Please enter valid product details");
+            return;
+        }
+
+        // Update the product
+        product.name = newName;
+        product.price = newPrice;
+        product.img = newImage;
+
+        // Update matching item in the cart too
+        localCartItem = localCartItem.map(p => {
+            if (p.id === id) {
+                return {
+                    ...p,
+                    name: newName,
+                    price: newPrice,
+                    img: newImage
+                };
+            }
+
+            return p;
+        });
+
+        updateLocalStorage();
+        showProduct();
+
+        bootstrap.Modal.getInstance(updateModal).hide();
+
+        alert("Product details updated successfully");
+    };
 }
